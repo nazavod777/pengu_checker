@@ -1,0 +1,8 @@
+eth_abi>=5.0.0
+loguru>=0.7.2
+web3>=6.15.1
+aiofiles>=23.2.1
+eth-account>=0.11.0
+better-proxy>=1.1.0
+tenacity>=9.0.0
+curl_cffi>=0.7.1
