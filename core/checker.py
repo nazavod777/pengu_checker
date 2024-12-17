@@ -42,7 +42,8 @@ class Checker:
                     headers={
                         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
                         'accept-language': 'ru,en;q=0.9',
-                    }
+                    },
+                    timeout=15
                 )
 
             if '<title>Access denied |' in r.text:
@@ -60,13 +61,13 @@ class Checker:
             ) from error
 
     async def balance_checker(self) -> None:
-        account_balance, claimed_balance = await self._get_balance()
+        account_balance, unclaimed_balance = await self._get_balance()
 
         if account_balance <= 0:
             logger.error(f'{self.account_address} | Not Eligible')
             return
 
-        if claimed_balance >= account_balance:
+        if unclaimed_balance <= 0:
             logger.info(f'{self.account_address} | Claimed')
             return
 
