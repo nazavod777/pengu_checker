@@ -46,6 +46,7 @@ class Checker:
                 response_text: str = r.text
 
                 if '<title>Access denied |' in response_text:
+                    response_text: None = None
                     raise Exception(f'{self.log_address} | CloudFlare')
 
                 return r.json()['total'], r.json()['totalUnclaimed']
@@ -70,6 +71,7 @@ class Checker:
                 response_text: str = r.text
 
                 if '<title>Access denied |' in response_text:
+                    response_text: None = None
                     raise Exception(f'{self.log_address} | CloudFlare')
 
                 return r.json()['message'], r.json()['signingDate']
@@ -113,6 +115,7 @@ class Checker:
                 response_text: str = r.text
 
                 if '<title>Access denied |' in response_text:
+                    response_text: None = None
                     raise Exception(f'{self.log_address} | CloudFlare')
 
                 if not r.json()['isValid']:
