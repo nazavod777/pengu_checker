@@ -4,7 +4,7 @@
 
 
 ### data/accounts.txt  
-_- Private Keys / Mnemonics с новой строки_
+_- Private Keys / Mnemonics (evm/sol) с новой строки_
 
 ### data/proxies.txt  
 _- Proxies с новой строки (любой формат)_
