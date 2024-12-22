@@ -1,12 +1,16 @@
 import asyncio
 from os import mkdir
 from os.path import exists
+from sys import platform
 from sys import stderr
 
 from loguru import logger
 
 from core import check_account
 from utils import loader
+
+if platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 logger.remove()
 logger.add(stderr, format='<white>{time:HH:mm:ss}</white>'
