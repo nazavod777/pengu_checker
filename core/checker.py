@@ -121,19 +121,18 @@ class Checker:
                                                      sign_date=sign_date)
 
         account_balance, unclaimed_balance = await self._get_eligibility(auth_token=auth_token)
-        available_balance: int = account_balance - unclaimed_balance
 
-        if available_balance <= 0:
+        if unclaimed_balance <= 0:
             logger.error(f'{self.account.address} | Not Eligible')
             return
 
-        logger.success(f'{self.account.address} | Available: {available_balance} $PENGU | Total: {account_balance} '
-                       f'$PENGU | Unclaimed: {unclaimed_balance} $PENGU')
+        logger.success(f'{self.account.address} | Available: {unclaimed_balance} $PENGU | Total: {account_balance} '
+                       f'$PENGU')
 
         async with asyncio.Lock():
             await append_file(
                 file_path='result/with_balances.txt',
-                file_content=f'{self.account.address} | {self.account.key.hex()} | {available_balance} $PENGU\n'
+                file_content=f'{self.account.address} | {self.account.key.hex()} | {unclaimed_balance} $PENGU\n'
             )
 
 
